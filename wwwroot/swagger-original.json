@@ -1,0 +1,66 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "GoApi",
+    "description" : "our first one",
+    "version" : "1.0.1-oas3"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:5000/api/Sample"
+  } ],
+  "paths" : {
+    "/users/{userId}" : {
+      "get" : {
+        "summary" : "Returns a user by ID.",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "the ID of the user to return.",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "The specified user ID is invalid (e.g. not a number)"
+          },
+          "404" : {
+            "description" : "A user with the specified ID was not found"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "inline_response_200" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        },
+        "example" : {
+          "name" : "name",
+          "id" : 0
+        }
+      }
+    }
+  }
+}
